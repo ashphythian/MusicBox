@@ -10,6 +10,10 @@ ScaleBuilder.build('C', 'Maj') # => ["C", "D", "E", "F", "G", "A", "B", "C"]
 ```
 
 ## TODOs
+### Small:
+* Make scales diatonic
+
+### Big:
 * Add a scale finder
 * Add a chord finder
 * Add an audio converter
