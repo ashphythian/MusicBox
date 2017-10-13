@@ -3,9 +3,9 @@ require 'pry'
 module Scales
   def major
     {
-      'C' => ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
-      'Db' => ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'],
-      'D' => ['D', 'E', 'Gb', 'G', 'A', 'B', 'Db'],
+      'C' => ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'],
+      'Db' => ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C', 'Db'],
+      'D' => ['D', 'E', 'F#', 'G', 'A', 'B', 'C#', 'D'],
       'Eb' => [], 
       'E' => [],
       'F' => [],

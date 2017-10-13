@@ -4,15 +4,29 @@ class ScaleBuilder
   InvalidRootError = Class.new(StandardError)
 
   def initialize(root, mode)
-    @root = root.upcase
+    @root = root[0].upcase + root[1..-1]
     @mode = mode.downcase
   end
 
-  def self.build
+  def self.build(root, mode)
     new(root, mode).build
   end
 
   def build
+    scale[0..-2].each_with_index.map do |note, index|
+      if adjacent_notes(note, index)
+        flattened_sharp[note]
+      else
+        note
+      end
+    end << scale[-1]
+  end
+
+  def self.scale(root, mode)
+    new(root, mode).scale
+  end
+
+  def scale
     current_index = notes.index(convert_root)
     output = [notes[current_index]]
 
@@ -26,9 +40,14 @@ class ScaleBuilder
 
   private
 
+  def adjacent_notes(note, index)
+    (note[0] == scale[index + 1][0] || note[0] == scale[index - 1][0]) &&
+      note.length == 2
+  end
+
   def convert_root
-    if sharpened_root.include?(root)
-      sharpened_root[root]
+    if sharpened_flat.include?(root)
+      sharpened_flat[root]
     elsif notes.include?(root)
       root
     else
@@ -36,13 +55,23 @@ class ScaleBuilder
     end
   end
 
-  def sharpened_root
+  def sharpened_flat
     {
-      'DB' => 'C#',
-      'EB' => 'D#',
-      'GB' => 'F#',
-      'AB' => 'G#',
-      'BB' => 'A#'
+      'Db' => 'C#',
+      'Eb' => 'D#',
+      'Gb' => 'F#',
+      'Ab' => 'G#',
+      'Bb' => 'A#'
+    }
+  end
+
+  def flattened_sharp
+    {
+      'C#' => 'Db',
+      'D#' => 'Eb',
+      'F#' => 'Gb',
+      'G#' => 'Ab',
+      'A#' => 'Bb'
     }
   end
 
